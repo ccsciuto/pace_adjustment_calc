@@ -1,6 +1,7 @@
 from tkinter import *
 import pandas as pd
 import math
+from tkinter import messagebox
 
 # import changes calc file
 changes = pd.read_csv("changes.csv")
@@ -8,7 +9,7 @@ dict_change = {row.Total: row.Change for (index, row) in changes.iterrows()}
 
 
 # create function to calc paces
-def calculate_pace():
+def calculate_goal_pace():
     total_seconds = float(minute.get())*60 + float(second.get())
     t_dp = float(dew_point.get()) + float(temp.get())
     percent = dict_change[t_dp]
@@ -17,12 +18,19 @@ def calculate_pace():
     new_min = math.floor(new_pace_seconds/60)
     new_sec = int(new_pace_seconds % 60)
     # new pace label
-    new_pace_label = Label(text="The adjusted pace is:")
-    new_pace_label.place(x=250, y=100)
-    new_pace = Label(text=f"{new_min}:{new_sec}")
-    new_pace.place(x=385, y=100)
-    per_mile.place(x=420, y=100)
+    messagebox.showerror(title="Adjusted Pace", message=f"The adjusted pace is: {new_min}:{new_sec}/mile")
 
+
+def calculate_faster_pace():
+    total_seconds = float(minute.get())*60 + float(second.get())
+    t_dp = float(dew_point.get()) + float(temp.get())
+    percent = dict_change[t_dp]
+    amount_change = (percent+100)/100
+    new_pace_seconds = total_seconds / amount_change
+    new_min = math.floor(new_pace_seconds/60)
+    new_sec = int(new_pace_seconds % 60)
+    # new pace label
+    messagebox.showerror(title="Adjusted Pace", message=f"The adjusted pace is: {new_min}:{new_sec}/mile")
 
 
 # create screen
@@ -41,6 +49,7 @@ goal_pace.place(x=100, y=65)
 # create entries for min and sec per mile
 minute = Entry(width=3)
 minute.place(x=100, y=100)
+minute.focus()
 colon = Label(text=":")
 colon.place(x=140, y=100)
 second = Entry(width=3)
@@ -57,7 +66,7 @@ temp.place(x=200, y=190)
 temp_label = Label(text="Temperature:")
 temp_label.place(x=100, y=190)
 # create Adjust button
-adjust = Button(text="Adjust", command=calculate_pace)
+adjust = Button(text="Adjust", command=calculate_goal_pace)
 adjust.place(x=100, y=225)
 
 window.mainloop()
