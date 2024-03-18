@@ -18,7 +18,7 @@ def calculate_warmer_pace():
     new_min = math.floor(new_pace_seconds/60)
     new_sec = int(new_pace_seconds % 60)
     # new pace label
-    messagebox.showerror(title="Adjusted Pace", message=f"The adjusted pace is: {new_min}:{new_sec}/mile")
+    messagebox.showinfo(title="Adjusted Pace", message=f"The adjusted pace is: {new_min}:{new_sec}/mile")
 
 
 def calculate_cooler_pace():
@@ -30,7 +30,7 @@ def calculate_cooler_pace():
     new_min = math.floor(new_pace_seconds/60)
     new_sec = int(new_pace_seconds % 60)
     # new pace label
-    messagebox.showerror(title="Adjusted Pace", message=f"The adjusted pace is: {new_min}:{new_sec}/mile")
+    messagebox.showinfo(title="Adjusted Pace", message=f"The adjusted pace is: {new_min}:{new_sec}/mile")
 
 
 # create screen
